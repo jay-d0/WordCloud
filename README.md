@@ -7,7 +7,7 @@
 - "gmarket"
 - "Batang"
 - "Dotum"
-- customizing: .ttf
+- customizing: font/*.ttf
 
 ## mask
 
@@ -16,7 +16,7 @@
 - "cloud"
 - "dolphin"
 - "person"
-- customizing: .png
+- customizing: mask/*.png
 
 ## packages
 
