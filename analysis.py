@@ -8,9 +8,50 @@ def analysis(keyword, context):
     from collections import Counter
     import re
 
+    def extract(x, keyword, r):
+        try:
+            if x.index(keyword) < r and x.index(keyword) > len(x) - r:
+                return x
+            elif x.index(keyword) < r:
+                return x[0 : x.index(keyword)+r]
+            elif x.index(keyword) > len(x) - r:
+                return x[x.index(keyword)-r : -1]
+            else:
+                return x[x.index(keyword)-r : x.index(keyword)+r]
+        except:
+            return extract_upper(x, keyword, r)
+
+    def extract_upper(x, keyword, r):
+        new_keyword = keyword.upper()
+        try:
+            if x.index(new_keyword) < r and x.index(new_keyword) > len(x) - r:
+                return x
+            elif x.index(new_keyword) < r:
+                return x[0 : x.index(new_keyword)+r]
+            elif x.index(new_keyword) > len(x) - r:
+                return x[x.index(new_keyword)-r : -1]
+            else:
+                return x[x.index(new_keyword)-r : x.index(new_keyword)+r]
+        except:
+            return extract_lower(x, keyword, r)
+
+    def extract_lower(x, keyword, r):
+        keyword = keyword.lower()
+        try:
+            if x.index(keyword) < r and x.index(keyword) > len(x) - r:
+                return x
+            elif x.index(keyword) < r:
+                return x[0 : x.index(keyword)+r]
+            elif x.index(keyword) > len(x) - r:
+                return x[x.index(keyword)-r : -1]
+            else:
+                return x[x.index(keyword)-r : x.index(keyword)+r]
+        except:
+            return ''
+
     word = re.compile(f'[가-힣ㄱ-ㅎㅏ-ㆌ0-9{keyword}{keyword.upper()}{keyword.lower()}]+')
     context['내용'] = context['내용'].apply(lambda x: word.findall(str(x)))
-    context['내용'] = context['내용'].apply(lambda x: ' '.join(x))
+    context['내용'] = context['내용'].apply(lambda x: ' '.join(extract(x, keyword, 10)))
 
     ###
     han = Hannanum()

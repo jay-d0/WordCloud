@@ -30,5 +30,5 @@ def make_wcld(keyword, freq_datas, path, font, mask):
   plt.figure(figsize=(20, 20))
   plt.imshow(wordcl, interpolation="bilinear")
   plt.axis("off")
-  plt.savefig(f'{path}/wordcloud_{keyword}.jpg', dpi=1500)
+  plt.savefig(f'{path}/wordcloud_{keyword}.jpg', dpi=600)
   plt.show()

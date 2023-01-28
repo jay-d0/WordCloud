@@ -6,20 +6,22 @@ def make_wcld(keyword, save_path=None, speed='normal',
     import datetime
     import nest_asyncio
     import asyncio
+    import warnings
+    import os
+
+    warnings.filterwarnings(action='ignore')
 
     if print_check_time:
         t0 = datetime.datetime.now()
         print('시작시간 : ', t0)
 
     if not save_path:
-        save_path = f'wordcloud/{datetime.datetime.today().strftime("%y.%m.%d")}'
-        import os
-        try:
-            if not os.path.exists(save_path):
-                os.makedirs(save_path)
-        except OSError:
-            print("Error: Failed to create the directory.")
-        
+        save_path = f'wordcloud/{datetime.datetime.today().strftime("%y.%m.%d")}'    
+    try:
+        if not os.path.exists(save_path):
+            os.makedirs(save_path)
+    except OSError:
+        print("Error: Failed to create the directory.") 
 
     nest_asyncio.apply()
 
